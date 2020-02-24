@@ -1,4 +1,5 @@
 import java.util.Objects;
+import java.util.Scanner;
 
 public class Person {
     String name;
@@ -9,24 +10,14 @@ public class Person {
         this.yearOfBirth = yearOfBirth;
     }
 
-    public String getName() {
-
-        return name;
-    }
-
-    public void setName(String name) {
-
-        this.name = name;
-    }
-
-    public int getYearOfBirth() {
-
-        return yearOfBirth;
-    }
-
-    public void setId(int yearOfBirth) {
-
-        this.yearOfBirth = yearOfBirth;
+    public static Person createPerson() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Podaj imię: ");
+        String name = scanner.nextLine();
+        System.out.println("Podaj rok urodzenia ");
+        int yearOfBirth = scanner.nextInt();
+        scanner.nextLine();
+        return new Person(name, yearOfBirth);
     }
 
     @Override
@@ -40,12 +31,22 @@ public class Person {
 
     @Override
     public int hashCode() {
-
         return Objects.hash(name, yearOfBirth);
     }
 
-    String printInfo() {
+    boolean samePerson(Person[] personType, Person person) {
+        boolean samePerson = false;
+        for (Person uniquePerson : personType) {
+            if (person.equals(uniquePerson)) {
+                samePerson = true;
+                break;
+            }
+        }
+        return samePerson;
+    }
 
-        return "Imię: " + name + ", rok urodzenia: " + yearOfBirth;
+    @Override
+    public String toString() {
+        return "Imię: " + name + ", Rok urodzenia: " + yearOfBirth;
     }
 }
